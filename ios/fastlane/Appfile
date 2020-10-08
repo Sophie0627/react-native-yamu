@@ -1,0 +1,8 @@
+app_identifier("com.yamu.rnapp") # The bundle identifier of your app
+apple_id("trevorbergeron@hotmail.com") # Your Apple email address
+
+itc_team_id("118374923") # App Store Connect Team ID
+team_id("9ERDCSNJKL") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

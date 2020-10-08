@@ -1,0 +1,6 @@
+module Pods_Yamu_YamuTests {
+  umbrella header "Pods-Yamu-YamuTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
