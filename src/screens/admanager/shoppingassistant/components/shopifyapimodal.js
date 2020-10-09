@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import {
   Platform,
@@ -45,9 +44,54 @@ export default class ShopifyApiModal extends Component {
     super(props);
   }
 
+  fetchCollection(namespace) {
+    urlAccess = namespace + '/admin/oauth/access_scopes.json';
+    console.log('urlAcess: ' + urlAccess)
+    
+    fetch(urlAccess, {
+      method: 'GET',
+    });
+
+    url = namespace + '/admin/api/2020-10/collects.json';
+    console.log('url ' + url)
+    fetch(url, {
+      method: 'GET',
+    })
+    .then((response) => response.json())
+    //If response is in json then in success
+    .then((responseJson) => {
+      //Success
+      alert(JSON.stringify(responseJson));
+      for(collection of responseJson.collects) {
+        urlCollection = namespace + '/admin/api/2020-10/collections/' + collection.collection_id + '/products.json';
+        console.log(urlCollection);
+        fetch(urlCollection, {
+          method: 'GET',
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson);
+        })
+        .catch((error) => {
+          //Error
+        alert(JSON.stringify(error));
+        console.error(error);
+        });
+      }
+    })
+    //If response is not in json then in error
+    .catch((error) => {
+      //Error
+      alert(JSON.stringify(error));
+      console.error(error);
+    });
+  }
+
   handleSubmit = () => {
     const value = this._form.getValue();
-    console.log('value: ', value);
+    const namespace = 'https://' + value.apikey + ':' + value.password + '@' + value.hostname + '.myshopify.com';
+    console.log('namespace: ', namespace);
+    this.fetchCollection(namespace);
   }
 
   render() {
