@@ -8,6 +8,7 @@ import R from 'res/R';
 import ApiModal from './components/apimodal';
 import GiveHeartModal from './components/giveheartmodal';
 import UpdateModal from './components/updatemodal';
+import ShopifyApiModal from './components/shopifyapimodal';
 
 export default class AdManangerShoppingAssistant extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class AdManangerShoppingAssistant extends Component {
 
     this.state = {
       showApiModal: false,
+      showShopifyApiModal: false,
       showGiveHeartModal: false,
       showUpdateModal: false,
       uploadStatus: 0,
@@ -39,7 +41,7 @@ export default class AdManangerShoppingAssistant extends Component {
       })
     } else if (index == 2) {
       this.setState({
-        showGiveHeartModal: true,
+        showShopifyApiModal: true,
       })
     }
   }
@@ -59,6 +61,7 @@ export default class AdManangerShoppingAssistant extends Component {
   hideModal = () => {
     this.setState({
       showApiModal: false,
+      showShopifyApiModal: false,
       showGiveHeartModal: false,
       showUpdateModal: false,
     });
@@ -169,6 +172,13 @@ export default class AdManangerShoppingAssistant extends Component {
         {this.state.showGiveHeartModal ? (
           <GiveHeartModal
             modalVisible={this.state.showGiveHeartModal}
+            pressHide={() => this.hideModal()}
+            pressGive={() => this._onPressGive()}
+          />
+        ) : null}
+        {this.state.showShopifyApiModal ? (
+          <ShopifyApiModal
+            modalVisible={this.state.showShopifyApiModal}
             pressHide={() => this.hideModal()}
             pressGive={() => this._onPressGive()}
           />
